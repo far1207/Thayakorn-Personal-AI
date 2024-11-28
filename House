@@ -1,0 +1,34 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+print('GMM >>>')
+### HW: Complete the code below ###
+w1, w2 = 15, 25  # Weights
+mu1, mu2 = 20, 15  # Means
+sd1, sd2 = 30, 98  # Standard deviations
+
+# Normalize weights
+w1 = w1 / (w1 + w2)
+w2 = w2 / (w1 + w2)
+
+print('p(x) = %.2fNormal(%.2f, %.2f) + %.2fNormal(%.2f, %.2f)' % (w1, mu1, sd1, w2, mu2, sd2))
+
+# Generate data for the two distributions
+data1 = np.random.normal(mu1, sd1, 1000)  # 1000 samples from the first Gaussian
+data2 = np.random.normal(mu2, sd2, 1000)  # 1000 samples from the second Gaussian
+
+# Visualization function
+def viz(data, bins, alpha):
+    plt.figure(figsize=(10, 6))
+    for i, d in enumerate(data):
+        plt.hist(d, bins=bins, alpha=alpha/100, label=f'Data {i+1}')
+    plt.legend()
+    plt.title('Visualization of Gaussian Mixtures')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.show()
+
+# Visualize the data and the inferred norms
+viz([list(data1), list(data2)], 25, 30)
+### End of HW ###
+
